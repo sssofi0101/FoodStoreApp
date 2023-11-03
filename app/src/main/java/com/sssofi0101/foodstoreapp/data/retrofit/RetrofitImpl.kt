@@ -31,32 +31,22 @@ class RetrofitImpl : FoodDataSource {
         return retrofit
     }
 
-    override fun getMeals(category: String) : Meals? {
-        var meals: Meals? = null
+    override fun getMeals(category: String) : Meals {
+        var meals: Meals = Meals(listOf())
         getService().getMenu(category).enqueue(object : Callback<Meals> {
 
             override fun onResponse(call: Call<Meals>, response: Response<Meals>) {
                 if (response.body() != null) {
                     meals = response.body()!!
+                    //здесь добавляем данные в адаптер для RecyclerView
                 }
                 else {
-                    meals = null
-//                    Toast.makeText(
-//                        this@MainActivity,
-//                        "Произошла ошибка при получении данных",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-                }
+                    throw Exception("Произошла ошибка при получении данных")
+                    }
             }
 
             override fun onFailure(call: Call<Meals>, t: Throwable) {
-//                Toast.makeText(
-//                    this@MainActivity,
-//                    "Произошла ошибка при доступе в сеть",
-//                    Toast.LENGTH_SHORT
-//                ).show()
-                meals = null
-                Log.d("err",t.localizedMessage)
+                throw Exception("Ошибка доступа к серверу",t)
             }
 
         })
