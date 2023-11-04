@@ -8,17 +8,48 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sssofi0101.foodstoreapp.R
+import com.sssofi0101.foodstoreapp.databinding.ActivityMainBinding
 import com.sssofi0101.foodstoreapp.presentation.viewmodel.MenuState
 import com.sssofi0101.foodstoreapp.presentation.viewmodel.MenuViewModel
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
 
     private val menuViewModel by viewModels<MenuViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val navView: BottomNavigationView = binding.bottomNavigationView
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+
+        val navController = navHostFragment.navController
+
+        navView.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.menuFragment -> {
+                    navController.navigate(R.id.menuFragment)
+                    return@setOnItemSelectedListener true
+                }
+                R.id.cartFragment -> {
+                    navController.navigate(R.id.cartFragment)
+                    return@setOnItemSelectedListener true
+                }
+                R.id.userFragment -> {
+                    navController.navigate(R.id.userFragment)
+                    return@setOnItemSelectedListener true
+                }
+
+                else -> {true}
+            }
+
+        }
 
         menuViewModel.loadFoodList("Dessert")
 
