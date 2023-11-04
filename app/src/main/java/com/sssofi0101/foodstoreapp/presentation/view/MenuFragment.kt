@@ -1,10 +1,14 @@
 package com.sssofi0101.foodstoreapp.presentation.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,11 +17,15 @@ import com.sssofi0101.foodstoreapp.domain.models.Meal
 import com.sssofi0101.foodstoreapp.presentation.adapters.BannerAdapter
 import com.sssofi0101.foodstoreapp.presentation.adapters.CategoryAdapter
 import com.sssofi0101.foodstoreapp.presentation.adapters.MealAdapter
+import com.sssofi0101.foodstoreapp.presentation.viewmodel.MenuState
+import com.sssofi0101.foodstoreapp.presentation.viewmodel.MenuViewModel
 
 class MenuFragment : Fragment() {
+    private val menuViewModel by viewModels<MenuViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
     }
 
@@ -40,9 +48,42 @@ class MenuFragment : Fragment() {
         val mealsRc = view.findViewById<RecyclerView>(R.id.meal_rc)
         mealsRc.layoutManager = LinearLayoutManager(this.requireContext(), LinearLayoutManager.VERTICAL,false)
         mealsRc.addItemDecoration(DividerItemDecoration(this.requireContext(),LinearLayoutManager.VERTICAL))
-        mealsRc.adapter = MealAdapter(arrayListOf(Meal("паста 1","https://www.themealdb.com/images/media/meals/usywpp1511189717.jpg","1"),
-            Meal("паста 2","https://www.themealdb.com/images/media/meals/0jv5gx1661040802.jpg","2")))
+        val mealsAdapter = MealAdapter(arrayListOf())
+        mealsRc.adapter = mealsAdapter
 
+
+        menuViewModel.loadFoodList("Dessert")
+
+        menuViewModel.menuState.observe(viewLifecycleOwner) {
+            when (it.status) {
+                MenuState.Status.FAILED -> {
+                    it.msg?.let { it1 -> Log.d("apiError", it.msg) }
+                    Toast.makeText(this.requireContext(), "${it.msg}", Toast.LENGTH_SHORT).show()
+                }
+
+                MenuState.Status.LOADING -> Toast.makeText(
+                    this.requireContext(),
+                    "Загрузка..",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                MenuState.Status.SUCCESS -> {
+                    Toast.makeText(
+                        this.requireContext(),
+                        "Успешно",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+
+        menuViewModel.mealsList.observe(viewLifecycleOwner){
+            Log.d("MyMeals",it.toString())
+            mealsAdapter.cleanList()
+            for (meal in it.meals){
+                mealsAdapter.addMeal(meal)
+            }
+        }
     }
 
 }

@@ -11,6 +11,9 @@ import com.sssofi0101.foodstoreapp.domain.usecases.GetMenuUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MenuViewModel() : ViewModel() {
 
@@ -28,17 +31,32 @@ class MenuViewModel() : ViewModel() {
     fun loadFoodList(category:String)  {
 
         viewModelScope.launch(Dispatchers.Main) {
-        withContext(Dispatchers.IO) {
+
             try {
                 _menuState.postValue(MenuState.LOADING)
-                val meals = getMenuUseCase.invoke(category)
-                _menuState.postValue(MenuState.LOADED)
-                _mealsList.postValue(meals)
+                val response = getMenuUseCase.invoke(category)
+                response.enqueue(object : Callback<Meals> {
+
+                    override fun onResponse(call: Call<Meals>, response: Response<Meals>) {
+                        if (response.body() != null) {
+                            _mealsList.postValue(response.body())
+                            _menuState.postValue(MenuState.LOADED)
+                        }
+                        else {
+                            _menuState.postValue(MenuState.error("Произошла ошибка при получении данных"))
+                        }
+                    }
+
+                    override fun onFailure(call: Call<Meals>, t: Throwable) {
+                        _menuState.postValue(MenuState.error("Произошла ошибка ${t.localizedMessage}"))
+                    }
+
+                })
 
             } catch (e: Exception) {
                 _menuState.postValue(MenuState.error(e.message))
             }
-        }
+
     }
     }
 

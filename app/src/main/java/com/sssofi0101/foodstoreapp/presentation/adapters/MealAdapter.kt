@@ -49,4 +49,5 @@ class MealAdapter (private val mealList:ArrayList<Meal>) : RecyclerView.Adapter<
         mealList.add(meal)
         notifyItemInserted(itemCount+1)
     }
+
 }

@@ -51,34 +51,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        menuViewModel.loadFoodList("Dessert")
 
-        menuViewModel.menuState.observe(this) {
-            when (it.status) {
-                MenuState.Status.FAILED -> {
-                    it.msg?.let { it1 -> Log.d("apiError", it.msg) }
-                    Toast.makeText(baseContext, "${it.msg}", Toast.LENGTH_SHORT).show()
-                }
-
-                MenuState.Status.LOADING -> Toast.makeText(
-                    baseContext,
-                    "Загрузка..",
-                    Toast.LENGTH_SHORT
-                ).show()
-
-                MenuState.Status.SUCCESS -> {
-                    Toast.makeText(
-                        baseContext,
-                        "Успешно",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        }
-
-        menuViewModel.mealsList.observe(this){
-            Log.d("MyMeals",it.toString())
-        }
     }
 }
 
