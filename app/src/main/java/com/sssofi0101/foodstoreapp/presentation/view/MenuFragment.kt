@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sssofi0101.foodstoreapp.R
 import com.sssofi0101.foodstoreapp.databinding.FragmentMenuBinding
 import com.sssofi0101.foodstoreapp.presentation.adapters.BannerAdapter
-import com.sssofi0101.foodstoreapp.presentation.adapters.CategoryAdapter
 import com.sssofi0101.foodstoreapp.presentation.adapters.MealAdapter
 import com.sssofi0101.foodstoreapp.presentation.viewmodel.MenuState
 import com.sssofi0101.foodstoreapp.presentation.viewmodel.MenuViewModel
@@ -46,10 +45,7 @@ class MenuFragment : Fragment() {
             bannerRc.layoutManager =
                 LinearLayoutManager(this@MenuFragment.requireContext(), LinearLayoutManager.HORIZONTAL, false)
             bannerRc.adapter = BannerAdapter(arrayListOf(R.drawable.banner1, R.drawable.banner2))
-            categoryRc.layoutManager =
-                LinearLayoutManager(this@MenuFragment.requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            categoryRc.adapter =
-                CategoryAdapter(arrayListOf("Стартеры", "Паста", "Морепродукты", "Десерты"))
+
             val mealsRc = view.findViewById<RecyclerView>(R.id.meal_rc)
             mealsRc.layoutManager =
                 LinearLayoutManager(this@MenuFragment.requireContext(), LinearLayoutManager.VERTICAL, false)

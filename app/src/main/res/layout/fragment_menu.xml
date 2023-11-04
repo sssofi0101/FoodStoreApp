@@ -1,75 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="top"
     android:gravity="top"
     android:orientation="vertical"
-    app:layout_anchorGravity="top"
     tools:context=".presentation.view.MenuFragment">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="16dp"
-        android:gravity="top"
-        android:orientation="horizontal">
+        android:backgroundTint="?attr/colorSecondary">
 
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/gray"
-            android:entries="@array/cities_array" />
 
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5" />
-
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="0.04"
-            android:background="@android:color/transparent"
-            android:src="@drawable/qr" />
-    </LinearLayout>
-
-    <com.google.android.material.appbar.CollapsingToolbarLayout
-        android:id="@+id/toolbar_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        android:visibility="visible"
-        app:contentScrim="?attr/colorPrimary"
-        app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-        <LinearLayout
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_collapseMode="parallax">
+            android:fitsSystemWindows="true"
+            android:visibility="visible"
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/banner_rc"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_collapseMode="parallax">
+                android:layout_gravity="bottom"
+                android:backgroundTint="@color/white"
+                android:gravity="bottom"
+                android:orientation="vertical"
+                app:layout_collapseMode="parallax"
+                app:layout_scrollFlags="scroll|snap">
 
-            </androidx.recyclerview.widget.RecyclerView>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/banner_rc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:fitsSystemWindows="true">
 
+                </androidx.recyclerview.widget.RecyclerView>
+
+
+            </LinearLayout>
+
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_collapseMode="pin">
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scrollbars="none"
+                android:visibility="visible"
                 app:layout_collapseMode="pin">
 
                 <com.google.android.material.chip.ChipGroup
@@ -78,13 +71,13 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginBottom="10dp"
                     android:clickable="true"
+                    android:focusable="true"
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
                     app:checkedChip="@id/starter_chip"
                     app:selectionRequired="true"
                     app:singleLine="true"
-                    app:singleSelection="true"
-                    android:focusable="true">
+                    app:singleSelection="true">
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/starter_chip"
@@ -101,57 +94,50 @@
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/pasta_chip"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
                         android:text="@string/Pasta"
-                        app:chipCornerRadius="10dp"
-                        style="@style/Widget.MaterialComponents.Chip.Filter"
                         app:checkedIconVisible="false"
-                        app:rippleColor="?attr/colorPrimaryVariant"/>
+                        app:chipCornerRadius="10dp"
+                        app:rippleColor="?attr/colorPrimaryVariant" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/seafood_chip"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
                         android:text="@string/Seafood"
-                        app:chipCornerRadius="10dp"
-                        style="@style/Widget.MaterialComponents.Chip.Filter"
                         app:checkedIconVisible="false"
-                        app:rippleColor="?attr/colorPrimaryVariant"/>
+                        app:chipCornerRadius="10dp"
+                        app:rippleColor="?attr/colorPrimaryVariant" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/dessert_chip"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
                         android:text="@string/Desserts"
-                        app:chipCornerRadius="10dp"
-                        style="@style/Widget.MaterialComponents.Chip.Filter"
                         app:checkedIconVisible="false"
-                        app:rippleColor="?attr/colorPrimaryVariant"
-                        />
+                        app:chipCornerRadius="10dp"
+                        app:rippleColor="?attr/colorPrimaryVariant" />
                 </com.google.android.material.chip.ChipGroup>
             </HorizontalScrollView>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/category_rc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?attr/colorOnPrimary"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:visibility="gone"
-                app:layout_collapseMode="pin" />
-        </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
 
 
-    </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-    <ScrollView
+
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -163,7 +149,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

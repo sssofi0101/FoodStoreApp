@@ -2,9 +2,16 @@ package com.sssofi0101.foodstoreapp.presentation.view
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.SpinnerAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatSpinner
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -24,6 +31,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val toolbar: Toolbar = binding.mainToolbar
+
+        setSupportActionBar(binding.mainToolbar)
+        val rootView = window.decorView as ViewGroup
+        supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        supportActionBar?.customView = layoutInflater.inflate(R.layout.action_bar, rootView, false)
 
         val navView: BottomNavigationView = binding.bottomNavigationView
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
@@ -52,6 +66,7 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
 }
 
 
