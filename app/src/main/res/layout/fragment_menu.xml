@@ -5,8 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="top"
-    android:layout_marginStart="10dp"
-    android:layout_marginEnd="10dp"
     android:gravity="top"
     android:orientation="vertical"
     app:layout_anchorGravity="top"
@@ -15,7 +13,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="16dp"
         android:gravity="top"
         android:orientation="horizontal">
@@ -65,10 +65,66 @@
             </androidx.recyclerview.widget.RecyclerView>
 
 
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:clickable="true"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    app:checkedChip="@id/starter_chip"
+                    app:selectionRequired="true"
+                    app:singleLine="true"
+                    app:singleSelection="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/starter_chip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:text="Стартеры"
+                        app:chipCornerRadius="10dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/pasta_chip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:text="Паста"
+                        app:chipCornerRadius="10dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/seafood_chip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:text="Морепродукты"
+                        app:chipCornerRadius="10dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/dessert_chip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:text="Десерты"
+                        app:chipCornerRadius="10dp" />
+                </com.google.android.material.chip.ChipGroup>
+            </HorizontalScrollView>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/category_rc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="?attr/colorOnPrimary"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:visibility="gone"
                 app:layout_collapseMode="pin" />
         </LinearLayout>
 
@@ -77,7 +133,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -85,6 +141,7 @@
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/meal_rc"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>

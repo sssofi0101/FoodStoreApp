@@ -32,13 +32,4 @@ class BannerAdapter(private val bannerList: ArrayList<Int>) : RecyclerView.Adapt
         holder.bind(bannerList[position])
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun cleanList(){
-        bannerList.removeAll(bannerList)
-        notifyDataSetChanged()
-    }
-    fun addDay(image: Int){
-        bannerList.add(image)
-        notifyItemInserted(itemCount+1)
-    }
 }
