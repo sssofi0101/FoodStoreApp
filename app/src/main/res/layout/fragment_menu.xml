@@ -83,39 +83,55 @@
                     app:checkedChip="@id/starter_chip"
                     app:selectionRequired="true"
                     app:singleLine="true"
-                    app:singleSelection="true">
+                    app:singleSelection="true"
+                    android:focusable="true">
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/starter_chip"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
-                        android:text="Стартеры"
-                        app:chipCornerRadius="10dp" />
+                        android:checked="true"
+                        android:text="@string/Starters"
+                        app:checkedIconVisible="false"
+                        app:chipCornerRadius="10dp"
+                        app:chipIconVisible="false"
+                        app:rippleColor="?attr/colorPrimaryVariant" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/pasta_chip"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
-                        android:text="Паста"
-                        app:chipCornerRadius="10dp" />
+                        android:text="@string/Pasta"
+                        app:chipCornerRadius="10dp"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        app:checkedIconVisible="false"
+                        app:rippleColor="?attr/colorPrimaryVariant"/>
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/seafood_chip"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
-                        android:text="Морепродукты"
-                        app:chipCornerRadius="10dp" />
+                        android:text="@string/Seafood"
+                        app:chipCornerRadius="10dp"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        app:checkedIconVisible="false"
+                        app:rippleColor="?attr/colorPrimaryVariant"/>
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/dessert_chip"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
-                        android:text="Десерты"
-                        app:chipCornerRadius="10dp" />
+                        android:text="@string/Desserts"
+                        app:chipCornerRadius="10dp"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        app:checkedIconVisible="false"
+                        app:rippleColor="?attr/colorPrimaryVariant"
+                        />
                 </com.google.android.material.chip.ChipGroup>
             </HorizontalScrollView>
 
