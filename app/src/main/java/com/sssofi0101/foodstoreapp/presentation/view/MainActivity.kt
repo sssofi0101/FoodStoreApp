@@ -33,15 +33,15 @@ class MainActivity : AppCompatActivity() {
 
         navView.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.menuFragment -> {
+                R.id.navigation_menu -> {
                     navController.navigate(R.id.menuFragment)
                     return@setOnItemSelectedListener true
                 }
-                R.id.cartFragment -> {
+                R.id.navigation_cart -> {
                     navController.navigate(R.id.cartFragment)
                     return@setOnItemSelectedListener true
                 }
-                R.id.userFragment -> {
+                R.id.navigation_user -> {
                     navController.navigate(R.id.userFragment)
                     return@setOnItemSelectedListener true
                 }
