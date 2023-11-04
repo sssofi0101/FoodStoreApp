@@ -19,7 +19,6 @@ import com.sssofi0101.foodstoreapp.presentation.viewmodel.MenuViewModel
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-    private val menuViewModel by viewModels<MenuViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
