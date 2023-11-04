@@ -3,8 +3,17 @@
     <string name="menu">Меню</string>
     <string name="profile">Профиль</string>
     <string name="cart">Корзина</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="cart_is_coming_soon">Cart is coming soon..</string>
     <string name="user_is_coming_soon">User is coming soon..</string>
+    <string-array name="cities_array">
+        <item>Москва</item>
+        <item>Санкт-Петербург</item>
+        <item>Краснодар</item>
+        <item>Казань</item>
+        <item>Курск</item>
+        <item>Самара</item>
+        <item>Калуга</item>
+        <item>Екатеринбург</item>
+    </string-array>
 </resources>
