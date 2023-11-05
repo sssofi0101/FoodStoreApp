@@ -1,30 +1,72 @@
 package com.sssofi0101.foodstoreapp.presentation.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.SpinnerAdapter
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatSpinner
+import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sssofi0101.foodstoreapp.R
-import com.sssofi0101.foodstoreapp.data.retrofit.IFoodApi
-import com.sssofi0101.foodstoreapp.domain.models.Meals
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Headers
-import retrofit2.http.Query
+import com.sssofi0101.foodstoreapp.databinding.ActivityMainBinding
+import com.sssofi0101.foodstoreapp.presentation.viewmodel.MenuState
+import com.sssofi0101.foodstoreapp.presentation.viewmodel.MenuViewModel
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val toolbar: Toolbar = binding.mainToolbar
+
+        setSupportActionBar(binding.mainToolbar)
+        val rootView = window.decorView as ViewGroup
+        supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        supportActionBar?.customView = layoutInflater.inflate(R.layout.action_bar, rootView, false)
+
+        val navView: BottomNavigationView = binding.bottomNavigationView
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+
+        val navController = navHostFragment.navController
+
+        navView.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.navigation_menu -> {
+                    navController.navigate(R.id.menuFragment)
+                    return@setOnItemSelectedListener true
+                }
+                R.id.navigation_cart -> {
+                    navController.navigate(R.id.cartFragment)
+                    return@setOnItemSelectedListener true
+                }
+                R.id.navigation_user -> {
+                    navController.navigate(R.id.userFragment)
+                    return@setOnItemSelectedListener true
+                }
+
+                else -> {true}
+            }
+
+        }
 
 
     }
+
 }
 
 

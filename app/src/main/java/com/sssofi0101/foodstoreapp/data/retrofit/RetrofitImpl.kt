@@ -31,36 +31,9 @@ class RetrofitImpl : FoodDataSource {
         return retrofit
     }
 
-    override fun getMeals(category: String) : Meals? {
-        var meals: Meals? = null
-        getService().getMenu(category).enqueue(object : Callback<Meals> {
+    override fun getMeals(category: String) : Call<Meals> {
+        return getService().getMenu(category)
 
-            override fun onResponse(call: Call<Meals>, response: Response<Meals>) {
-                if (response.body() != null) {
-                    meals = response.body()!!
-                }
-                else {
-                    meals = null
-//                    Toast.makeText(
-//                        this@MainActivity,
-//                        "Произошла ошибка при получении данных",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-                }
-            }
-
-            override fun onFailure(call: Call<Meals>, t: Throwable) {
-//                Toast.makeText(
-//                    this@MainActivity,
-//                    "Произошла ошибка при доступе в сеть",
-//                    Toast.LENGTH_SHORT
-//                ).show()
-                meals = null
-                Log.d("err",t.localizedMessage)
-            }
-
-        })
-        return meals
     }
 
 }
