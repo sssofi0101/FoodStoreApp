@@ -60,7 +60,7 @@ class MenuFragment : Fragment() {
         val mealsAdapter = MealAdapter(arrayListOf())
         binding.mealRc.adapter = mealsAdapter
 
-        menuViewModel.loadFoodList("Dessert")
+        menuViewModel.loadFoodList("Starter")
         binding.apply {
             dessertChip.setOnClickListener {
                 menuViewModel.loadFoodList("Dessert")
