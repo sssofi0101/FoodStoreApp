@@ -1,5 +1,6 @@
 package com.sssofi0101.foodstoreapp.presentation.viewmodel
 
+import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,6 +18,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MenuViewModel() : ViewModel() {
+
 
     private val _menuState = MutableLiveData<MenuState>()
     val menuState: LiveData<MenuState>
