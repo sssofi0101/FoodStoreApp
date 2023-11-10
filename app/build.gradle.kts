@@ -3,11 +3,14 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.devtools.ksp")
 }
+
 
 android {
     namespace = "com.sssofi0101.foodstoreapp"
     compileSdk = 34
+
 
     defaultConfig {
         applicationId = "com.sssofi0101.foodstoreapp"
@@ -31,25 +34,34 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+
     }
     kotlinOptions {
         jvmTarget = "1.8"
+
     }
     buildFeatures {
         viewBinding = true
         dataBinding = true
+
     }
 }
 
 dependencies {
-
-    implementation("androidx.room:room-ktx:2.6.0")
     val room_version = "2.6.0"
 
-    implementation("androidx.room:room-runtime:$room_version")
-    annotationProcessor("androidx.room:room-compiler:$room_version")
+    implementation ("androidx.room:room-runtime:$room_version")
+    annotationProcessor ("androidx.room:room-compiler:$room_version")
+
+    //implementation("androidx.room:room-ktx:2.6.0")
+//    val room_version = "2.6.0"
+//
+//    implementation("androidx.room:room-runtime:$room_version")
+    ksp("androidx.room:room-compiler:$room_version")
+    //annotationProcessor("androidx.room:room-compiler:$room_version")
     // To use Kotlin annotation processing tool (kapt)
-    implementation("com.google.devtools.ksp:symbol-processing-api:1.9.20-1.0.14")
+    //implementation("com.google.devtools.ksp:symbol-processing-api:1.9.20-1.0.14")
+
 
     implementation("androidx.core:core-ktx:1.8.0")
     implementation("androidx.appcompat:appcompat:1.5.0")
@@ -65,5 +77,5 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation ("com.squareup.okhttp3:logging-interceptor:4.8.0")
     implementation ("com.squareup.okhttp3:okhttp:4.8.0")
-    implementation ("com.squareup.picasso:picasso:2.71828")
+    implementation ("com.squareup.picasso:picasso:2.8")
 }

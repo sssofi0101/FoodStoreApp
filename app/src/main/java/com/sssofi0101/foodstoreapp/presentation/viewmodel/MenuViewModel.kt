@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sssofi0101.foodstoreapp.FoodApp
 import com.sssofi0101.foodstoreapp.data.retrofit.RetrofitImpl
 import com.sssofi0101.foodstoreapp.data.room.CategoryMeal
 import com.sssofi0101.foodstoreapp.data.room.DatabseImpl
@@ -34,15 +35,17 @@ class MenuViewModel() : ViewModel() {
 
     val retrofitImpl = RetrofitImpl()
     private val getMenuUseCase = GetMenuUseCase(retrofitImpl)
+    val cachedMenuUseCase = CachedMenuUseCase(FoodApp.database)
 
-    private lateinit var cachedMenuUseCase :CachedMenuUseCase
+   // private lateinit var cachedMenuUseCase :CachedMenuUseCase
 
-    fun loadCachedFoodList(category: String, databseImpl: DatabseImpl) {
-        cachedMenuUseCase = CachedMenuUseCase(databseImpl)
+    fun loadCachedFoodList(category: String) {
+
+    //fun loadCachedFoodList(category: String, databseImpl: DatabseImpl) {
+        //cachedMenuUseCase = CachedMenuUseCase(databseImpl)
         viewModelScope.launch {
             try {
                 _cacheMealsList.postValue(cachedMenuUseCase.load(category))
-
             }
             catch (e: Exception) {
                 _menuState.postValue(MenuState.error("Произошла ошибка при получении данных"))
@@ -50,8 +53,9 @@ class MenuViewModel() : ViewModel() {
         }
     }
 
-    fun loadFoodList(category:String, databseImpl: DatabseImpl)  {
-        cachedMenuUseCase = CachedMenuUseCase(databseImpl)
+    fun loadFoodList(category:String)  {
+//    fun loadFoodList(category:String, databseImpl: DatabseImpl)  {
+//        cachedMenuUseCase = CachedMenuUseCase(databseImpl)
 
         viewModelScope.launch(Dispatchers.Main) {
 

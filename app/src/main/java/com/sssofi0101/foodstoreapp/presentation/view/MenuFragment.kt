@@ -39,15 +39,12 @@ class MenuFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMenuBinding.inflate(inflater,container,false)
-        // Inflate the layout for this fragment
         return binding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        val bannerRc = view.findViewById<RecyclerView>(R.id.banner_rc)
-//        val categoryRc = view.findViewById<RecyclerView>(R.id.category_rc)
         with(binding)
         {
             bannerRc.layoutManager =
@@ -68,51 +65,61 @@ class MenuFragment : Fragment() {
         val mealsAdapter = MealAdapter(arrayListOf())
         binding.mealRc.adapter = mealsAdapter
         Log.d("activity?.application","${activity?.application}")
-        val database:AppDatabase  = Room.databaseBuilder(activity?.application?.applicationContext!!, AppDatabase::class.java, "mydatabase")
-            .fallbackToDestructiveMigration()
-            .allowMainThreadQueries()
-            .build()
-        val databaseiImpl = DatabseImpl(database)
+//        val database:AppDatabase  = Room.databaseBuilder(activity?.application?.applicationContext!!, AppDatabase::class.java, "mydatabase")
+//            .fallbackToDestructiveMigration()
+//            .allowMainThreadQueries()
+//            .build()
+//        val databaseiImpl = DatabseImpl(database)
 
 
         val context = this.requireContext()
         if (hasConnection(context)){
-            menuViewModel.loadFoodList("Starter",databaseiImpl)
+            //menuViewModel.loadFoodList("Starter",databaseiImpl)
+            menuViewModel.loadFoodList("Starter")
         }
         else {
-            menuViewModel.loadCachedFoodList("Starter",databaseiImpl)
+            //menuViewModel.loadCachedFoodList("Starter",databaseiImpl)
+            menuViewModel.loadCachedFoodList("Starter")
         }
         binding.apply {
             dessertChip.setOnClickListener {
                 if (hasConnection(context)){
-                    menuViewModel.loadFoodList("Dessert",databaseiImpl)
+                    //menuViewModel.loadFoodList("Dessert",databaseiImpl)
+                    menuViewModel.loadFoodList("Dessert")
                 }
                 else {
-                    menuViewModel.loadCachedFoodList("Dessert",databaseiImpl)
+                    //menuViewModel.loadCachedFoodList("Dessert",databaseiImpl)
+                    menuViewModel.loadCachedFoodList("Dessert")
                 }
             }
             starterChip.setOnClickListener {
                 if (hasConnection(context)){
-                    menuViewModel.loadFoodList("Starter",databaseiImpl)
+                    //menuViewModel.loadFoodList("Starter",databaseiImpl)
+                    menuViewModel.loadFoodList("Starter")
                 }
                 else {
-                    menuViewModel.loadCachedFoodList("Starter",databaseiImpl)
+                    //menuViewModel.loadCachedFoodList("Starter",databaseiImpl)
+                    menuViewModel.loadCachedFoodList("Starter")
                 }
             }
             pastaChip.setOnClickListener {
                 if (hasConnection(context)){
-                    menuViewModel.loadFoodList("Pasta",databaseiImpl)
+                    menuViewModel.loadFoodList("Pasta")
+                    //menuViewModel.loadFoodList("Pasta",databaseiImpl)
                 }
                 else {
-                    menuViewModel.loadCachedFoodList("Pasta",databaseiImpl)
+                    //menuViewModel.loadCachedFoodList("Pasta",databaseiImpl)
+                    menuViewModel.loadCachedFoodList("Pasta")
                 }
             }
             seafoodChip.setOnClickListener {
                 if (hasConnection(context)){
-                    menuViewModel.loadFoodList("Seafood",databaseiImpl)
+                    //menuViewModel.loadFoodList("Seafood",databaseiImpl)
+                    menuViewModel.loadFoodList("Seafood")
                 }
                 else {
-                    menuViewModel.loadCachedFoodList("Seafood",databaseiImpl)
+                    //menuViewModel.loadCachedFoodList("Seafood",databaseiImpl)
+                    menuViewModel.loadCachedFoodList("Seafood")
                 }
             }
         }

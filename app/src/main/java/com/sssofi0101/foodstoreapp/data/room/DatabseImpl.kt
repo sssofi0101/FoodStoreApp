@@ -7,9 +7,10 @@ import com.sssofi0101.foodstoreapp.domain.interfaces.FoodCacheDataSource
 import com.sssofi0101.foodstoreapp.domain.models.Meal
 
 class DatabseImpl(private val database: AppDatabase) : FoodCacheDataSource {
+//class DatabseImpl(private val application:Application) : FoodCacheDataSource {
 
-    //private val database = provideDatabase()
-
+//    private val database = provideDatabase()
+//
 //    fun provideDatabase():AppDatabase{
 //        return Room.databaseBuilder(application, AppDatabase::class.java, "mydatabase")
 //            .fallbackToDestructiveMigration()
