@@ -1,14 +1,10 @@
 package com.sssofi0101.foodstoreapp.data.retrofit
 
-import android.util.Log
-import android.widget.Toast
 import com.sssofi0101.foodstoreapp.domain.interfaces.FoodDataSource
 import com.sssofi0101.foodstoreapp.domain.models.Meals
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

@@ -1,6 +1,5 @@
 package com.sssofi0101.foodstoreapp.presentation.viewmodel
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.sssofi0101.foodstoreapp.FoodApp
 import com.sssofi0101.foodstoreapp.data.retrofit.RetrofitImpl
 import com.sssofi0101.foodstoreapp.data.room.CategoryMeal
-import com.sssofi0101.foodstoreapp.data.room.DatabseImpl
 import com.sssofi0101.foodstoreapp.domain.models.Meals
 import com.sssofi0101.foodstoreapp.domain.usecases.CachedMenuUseCase
 import com.sssofi0101.foodstoreapp.domain.usecases.GetMenuUseCase
@@ -37,12 +35,8 @@ class MenuViewModel() : ViewModel() {
     private val getMenuUseCase = GetMenuUseCase(retrofitImpl)
     val cachedMenuUseCase = CachedMenuUseCase(FoodApp.database)
 
-   // private lateinit var cachedMenuUseCase :CachedMenuUseCase
 
     fun loadCachedFoodList(category: String) {
-
-    //fun loadCachedFoodList(category: String, databseImpl: DatabseImpl) {
-        //cachedMenuUseCase = CachedMenuUseCase(databseImpl)
         viewModelScope.launch {
             try {
                 _cacheMealsList.postValue(cachedMenuUseCase.load(category))
@@ -54,11 +48,7 @@ class MenuViewModel() : ViewModel() {
     }
 
     fun loadFoodList(category:String)  {
-//    fun loadFoodList(category:String, databseImpl: DatabseImpl)  {
-//        cachedMenuUseCase = CachedMenuUseCase(databseImpl)
-
         viewModelScope.launch(Dispatchers.Main) {
-
             try {
                 _menuState.postValue(MenuState.LOADING)
                 val response = getMenuUseCase.invoke(category)
@@ -68,16 +58,12 @@ class MenuViewModel() : ViewModel() {
                         if (response.body() != null) {
                             _mealsList.postValue(response.body())
                             val categoryMeals = response.body()!!.meals.map { it -> CategoryMeal(it.idMeal,it.strMeal,it.strMealThumb,category) }
-                            //_cacheMealsList.postValue(categoryMeals)
                             cachedMenuUseCase.save(categoryMeals,category)
 
                             _menuState.postValue(MenuState.LOADED)
                         }
                         else {
                             _menuState.postValue(MenuState.error("Произошла ошибка при получении данных"))
-//                            _mealsList.postValue(Meals(
-//                                loadCachedMenuUseCase.invoke(category).map { it -> it.map { it -> Meal(it.name, it.imageUri, it.id) } }
-//                            ))
                         }
                     }
 
@@ -91,7 +77,6 @@ class MenuViewModel() : ViewModel() {
                 _menuState.postValue(MenuState.error(e.message))
             }
 
+        }
     }
-    }
-
 }

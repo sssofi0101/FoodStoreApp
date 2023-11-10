@@ -13,10 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
 import com.sssofi0101.foodstoreapp.R
-import com.sssofi0101.foodstoreapp.data.room.AppDatabase
-import com.sssofi0101.foodstoreapp.data.room.DatabseImpl
 import com.sssofi0101.foodstoreapp.databinding.FragmentMenuBinding
 import com.sssofi0101.foodstoreapp.domain.models.Meal
 import com.sssofi0101.foodstoreapp.presentation.adapters.BannerAdapter
@@ -27,7 +24,6 @@ import com.sssofi0101.foodstoreapp.presentation.viewmodel.MenuViewModel
 
 class MenuFragment : Fragment() {
     private val menuViewModel by viewModels<MenuViewModel>()
-    //private val menuViewModel = this.activity?.let { MenuViewModel(it.application) }
     private lateinit var binding: FragmentMenuBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,61 +60,44 @@ class MenuFragment : Fragment() {
         }
         val mealsAdapter = MealAdapter(arrayListOf())
         binding.mealRc.adapter = mealsAdapter
-        Log.d("activity?.application","${activity?.application}")
-//        val database:AppDatabase  = Room.databaseBuilder(activity?.application?.applicationContext!!, AppDatabase::class.java, "mydatabase")
-//            .fallbackToDestructiveMigration()
-//            .allowMainThreadQueries()
-//            .build()
-//        val databaseiImpl = DatabseImpl(database)
-
 
         val context = this.requireContext()
         if (hasConnection(context)){
-            //menuViewModel.loadFoodList("Starter",databaseiImpl)
             menuViewModel.loadFoodList("Starter")
         }
         else {
-            //menuViewModel.loadCachedFoodList("Starter",databaseiImpl)
             menuViewModel.loadCachedFoodList("Starter")
         }
         binding.apply {
             dessertChip.setOnClickListener {
                 if (hasConnection(context)){
-                    //menuViewModel.loadFoodList("Dessert",databaseiImpl)
                     menuViewModel.loadFoodList("Dessert")
                 }
                 else {
-                    //menuViewModel.loadCachedFoodList("Dessert",databaseiImpl)
                     menuViewModel.loadCachedFoodList("Dessert")
                 }
             }
             starterChip.setOnClickListener {
                 if (hasConnection(context)){
-                    //menuViewModel.loadFoodList("Starter",databaseiImpl)
                     menuViewModel.loadFoodList("Starter")
                 }
                 else {
-                    //menuViewModel.loadCachedFoodList("Starter",databaseiImpl)
                     menuViewModel.loadCachedFoodList("Starter")
                 }
             }
             pastaChip.setOnClickListener {
                 if (hasConnection(context)){
                     menuViewModel.loadFoodList("Pasta")
-                    //menuViewModel.loadFoodList("Pasta",databaseiImpl)
                 }
                 else {
-                    //menuViewModel.loadCachedFoodList("Pasta",databaseiImpl)
                     menuViewModel.loadCachedFoodList("Pasta")
                 }
             }
             seafoodChip.setOnClickListener {
                 if (hasConnection(context)){
-                    //menuViewModel.loadFoodList("Seafood",databaseiImpl)
                     menuViewModel.loadFoodList("Seafood")
                 }
                 else {
-                    //menuViewModel.loadCachedFoodList("Seafood",databaseiImpl)
                     menuViewModel.loadCachedFoodList("Seafood")
                 }
             }
@@ -174,9 +153,7 @@ class MenuFragment : Fragment() {
             return true
         }
         wifiInfo = cm.activeNetworkInfo
-        return if (wifiInfo != null && wifiInfo.isConnected) {
-            true
-        } else false
+        return wifiInfo != null && wifiInfo.isConnected
     }
 
 }

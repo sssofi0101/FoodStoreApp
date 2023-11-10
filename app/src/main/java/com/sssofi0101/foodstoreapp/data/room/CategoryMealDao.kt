@@ -11,12 +11,6 @@ interface CategoryMealDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg meals: CategoryMeal)
 
-    @Delete
-    fun deleteMeals(vararg meals: CategoryMeal)
-
-    @Query("SELECT * FROM menu")
-    fun getAll(): List<CategoryMeal>
-
     @Query("DELETE FROM menu WHERE category LIKE :category")
     fun deleteAllCategory(category: String)
 

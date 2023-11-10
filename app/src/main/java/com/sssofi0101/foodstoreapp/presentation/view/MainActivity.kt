@@ -3,30 +3,17 @@ package com.sssofi0101.foodstoreapp.presentation.view
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Spinner
-import android.widget.SpinnerAdapter
-import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sssofi0101.foodstoreapp.R
 import com.sssofi0101.foodstoreapp.databinding.ActivityMainBinding
-import com.sssofi0101.foodstoreapp.presentation.viewmodel.MenuState
-import com.sssofi0101.foodstoreapp.presentation.viewmodel.MenuViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
